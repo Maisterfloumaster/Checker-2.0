@@ -1,22 +1,99 @@
 body {
     margin: 0;
-    overflow: hidden;
-    background: black;
+    padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    flex-direction: column;
-    color: white;
-    font-family: Arial, sans-serif;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #000000, #01630e);
+    color: #00ff88;
 }
 
-canvas {
-    background: black;
+header {
+    margin-bottom: 20px;
 }
 
-#sizeDisplay {
+header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00ff88;
+    text-shadow: 0 0 10px #009d54, 0 0 20px #00ff88;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #a0ffa0;
+}
+
+main {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    width: 90%;
+}
+
+main h2 {
+    font-size: 2rem;
+    color: #00ff88;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+main p, main ul {
+    font-size: 1rem;
+    color: #a0ffa0;
+    line-height: 1.5;
+}
+
+main ul {
+    list-style: none;
+    padding: 0;
+}
+
+main ul li {
+    margin: 5px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+main ul li::before {
+    content: '•';
     position: absolute;
-    top: 20px;
-    font-size: 24px;
+    left: 0;
+    color: #00ff88;
+    font-size: 1.5rem;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: #00ff88;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 255, 136, 0.5);
+    transition: all 0.3s ease;
+}
+
+.download-button:hover {
+    background: #00cc6e;
+    box-shadow: 0 6px 15px rgba(0, 255, 136, 0.8);
+    transform: translateY(-3px);
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #a0ffa0;
+    text-shadow: 0 0 5px #00ff88;
 }
