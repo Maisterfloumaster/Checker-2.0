@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    background: black;
+}
+
+#sizeDisplay {
+    position: absolute;
+    top: 20px;
+    font-size: 24px;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Ball Escape</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sizeDisplay">Size: 10</div>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const sizeDisplay = document.getElementById("sizeDisplay");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let ball = { x: canvas.width / 2, y: canvas.height / 2, radius: 10, speed: 1, dx: 0, dy: 0 };
+        let rings = [];
+        let numRings = 20;
+        let ringGap = 25;
+
+        for (let i = 0; i < numRings; i++) {
+            rings.push({ radius: ringGap * (i + 2), color: i % 2 === 0 ? "red" : "green" });
+        }
+
+        function drawBall() {
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawRings() {
+            rings.forEach((ring) => {
+                ctx.strokeStyle = ring.color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ring.radius, 0, Math.PI * 2);
+                ctx.stroke();
+            });
+        }
+
+        function updateGame() {
+            if (rings.length > 0 && ball.radius >= rings[0].radius - 5) {
+                rings.shift();
+                ball.speed += 0.2;
+            }
+            ball.radius += ball.speed;
+            sizeDisplay.innerText = `Size: ${ball.radius.toFixed(2)}`;
+        }
+
+        function moveBall() {
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            // Prevent the ball from moving out of the canvas
+            if (ball.x - ball.radius < 0) ball.x = ball.radius;
+            if (ball.x + ball.radius > canvas.width) ball.x = canvas.width - ball.radius;
+            if (ball.y - ball.radius < 0) ball.y = ball.radius;
+            if (ball.y + ball.radius > canvas.height) ball.y = canvas.height - ball.radius;
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawRings();
+            drawBall();
+            updateGame();
+            moveBall();
+            requestAnimationFrame(gameLoop);
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowUp") ball.dy = -2;
+            if (e.key === "ArrowDown") ball.dy = 2;
+            if (e.key === "ArrowLeft") ball.dx = -2;
+            if (e.key === "ArrowRight") ball.dx = 2;
+        });
+
+        document.addEventListener("keyup", (e) => {
+            if (e.key === "ArrowUp" || e.key === "ArrowDown") ball.dy = 0;
+            if (e.key === "ArrowLeft" || e.key === "ArrowRight") ball.dx = 0;
+        });
+
+        gameLoop();
+    </script>
+</body>
+</html>
